@@ -1,18 +1,29 @@
-import type { RouteRecordRaw } from 'vue-router';
+import type { RouteRecordRaw } from 'vue-router'
 
 const routes: RouteRecordRaw[] = [
   {
     path: '/',
-    component: () => import('layouts/MainLayout.vue'),
-    children: [{ path: '', component: () => import('pages/IndexPage.vue') }],
+    redirect: '/login'
   },
-
-  // Always leave this as last one,
-  // but you can also remove it
+  {
+    path: '/login',
+    component: () => import('../pages/LoginPage.vue')
+  },
+  {
+    path: '/app',
+    component: () => import('layouts/MainLayout.vue'),
+    children: [
+      {
+        path: 'alunos',
+        component: () => import('pages/StudentsPage.vue')
+      },
+      // outras rotas protegidas podem ir aqui
+    ]
+  },
   {
     path: '/:catchAll(.*)*',
-    component: () => import('pages/ErrorNotFound.vue'),
-  },
-];
+    component: () => import('pages/ErrorNotFound.vue')
+  }
+]
 
-export default routes;
+export default routes

@@ -11,8 +11,8 @@ export default defineConfig((/* ctx */) => {
     // app boot file (/src/boot)
     // --> boot files are part of "main.js"
     // https://v2.quasar.dev/quasar-cli-vite/boot-files
-    boot: [
-    ],
+    boot: ['supabase'],
+
 
     // https://v2.quasar.dev/quasar-cli-vite/quasar-config-file#css
     css: [
@@ -39,14 +39,17 @@ export default defineConfig((/* ctx */) => {
         browser: [ 'es2022', 'firefox115', 'chrome115', 'safari14' ],
         node: 'node20'
       },
-
+      vueRouterMode: 'history',
+      env: {
+        SUPABASE_URL: 'https://lnppqlpdsqukhlkgdenp.supabase.co',
+        SUPABASE_KEY: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImxucHBxbHBkc3F1a2hsa2dkZW5wIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTMxNDA2NTQsImV4cCI6MjA2ODcxNjY1NH0.LPNIcpdVYHLYqLBcZ0HkKdPY1Jwkgsy03fmZ6YuKcX0'
+      },
       typescript: {
         strict: true,
         vueShim: true
         // extendTsConfig (tsConfig) {}
       },
 
-      vueRouterMode: 'hash', // available values: 'hash', 'history'
       // vueRouterBase,
       // vueDevtools,
       // vueOptionsAPI: false,
@@ -64,7 +67,7 @@ export default defineConfig((/* ctx */) => {
 
       // extendViteConf (viteConf) {},
       // viteVuePluginOptions: {},
-      
+
       vitePlugins: [
         ['vite-plugin-checker', {
           vueTsc: true,
@@ -84,7 +87,15 @@ export default defineConfig((/* ctx */) => {
 
     // https://v2.quasar.dev/quasar-cli-vite/quasar-config-file#framework
     framework: {
-      config: {},
+        plugins: ['Notify'],
+
+      config: {
+         brand: {
+      primary: '#2e1065',
+      secondary: '#0ea5e9',
+      // etc
+    }
+      },
 
       // iconSet: 'material-icons', // Quasar icon set
       // lang: 'en-US', // Quasar language pack
@@ -97,7 +108,6 @@ export default defineConfig((/* ctx */) => {
       // directives: [],
 
       // Quasar plugins
-      plugins: []
     },
 
     // animations: 'all', // --- includes all animations
@@ -213,6 +223,7 @@ export default defineConfig((/* ctx */) => {
        * @example [ 'my-script.ts', 'sub-folder/my-other-script.js' ]
        */
       extraScripts: []
+
     }
   }
 });
